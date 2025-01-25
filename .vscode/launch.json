@@ -26,6 +26,16 @@
 				"8000",
 				"--web-browser-flag=--disable-web-security"
 			]
+		},
+
+		{
+			"name": "Test Web",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main/learn/main_learn.dart",
+			"args": [
+				// "--target" , "lib/main/test/main_test.dart",
+			]
 		}
 	],
 	"compounds": []

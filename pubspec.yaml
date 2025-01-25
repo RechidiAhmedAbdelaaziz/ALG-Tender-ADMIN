@@ -47,6 +47,9 @@ dependencies:
   equatable: ^2.0.7
   flutter_screenutil: ^5.9.3
   go_router: ^14.7.1
+  retrofit: ^4.4.2
+  flutter_svg: ^2.0.17
+  animated_custom_dropdown: ^3.1.1
 
 dev_dependencies:
   flutter_test:
