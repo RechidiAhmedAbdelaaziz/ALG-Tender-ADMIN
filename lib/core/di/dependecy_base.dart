@@ -6,7 +6,8 @@ abstract class DependecyBase {
   static Future<void> _init() async {
     final dependencies = <DependecyBase>[
       AuthDependency(),
-      AnnouncerDependency()
+      AnnouncerDependency(),
+      NewspaperDependency(),
     ];
 
     for (final dependency in dependencies) {
