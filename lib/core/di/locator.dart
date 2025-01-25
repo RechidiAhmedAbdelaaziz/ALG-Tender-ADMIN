@@ -6,6 +6,7 @@ import 'package:tender_admin/core/router/router.dart';
 import 'package:tender_admin/core/services/cloudstorage/cloud_storage.service.dart';
 import 'package:tender_admin/core/services/cloudstorage/cloudinary/cloudinary.service.dart';
 import 'package:tender_admin/core/services/dio/dio.service.dart';
+import 'package:tender_admin/core/services/filepicker/filepick.service.dart';
 import 'package:tender_admin/features/announcer/config/announcer.dependency.dart';
 import 'package:tender_admin/features/auth/configs/auth.dependency.dart';
 
@@ -25,10 +26,14 @@ Future<void> setupLocator() async {
   //Router
   locator.registerSingleton(AppRouter());
 
+  //File Picker
+  locator.registerLazySingleton<FilePickerService>(
+      () => WebFilePicker());
+
   //Cloud storage service
   locator.registerLazySingleton<CloudinaryService>(() =>
       kIsWeb ? WebCloudinaryService() : MobileCloudinaryService());
-      
+
   locator.registerLazySingleton<CloudStorageService>(
       () => locator<CloudinaryService>());
 

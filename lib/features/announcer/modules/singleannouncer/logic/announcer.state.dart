@@ -1,6 +1,6 @@
 part of 'announcer.cubit.dart';
 
-enum _AnnouncerStatus { initial, loading, saved }
+enum _AnnouncerStatus { initial, loading, saved, error }
 
 class AnnouncerState<T extends AnnouncerDto> extends ErrorState {
   final T _announcerDto;
@@ -26,7 +26,8 @@ class AnnouncerState<T extends AnnouncerDto> extends ErrorState {
   AnnouncerState<T> _saved(AnnouncerModel model) =>
       _copyWith(status: _AnnouncerStatus.saved, model: model);
 
-  AnnouncerState<T> _error(String error) => _copyWith(error: error);
+  AnnouncerState<T> _error(String error) =>
+      _copyWith(error: error, status: _AnnouncerStatus.error);
 
   AnnouncerState<T> _copyWith({
     T? announcerDto,
@@ -48,5 +49,4 @@ class AnnouncerState<T extends AnnouncerDto> extends ErrorState {
   T get dto => _announcerDto;
 
   bool get isLoading => _status == _AnnouncerStatus.loading;
-
 }

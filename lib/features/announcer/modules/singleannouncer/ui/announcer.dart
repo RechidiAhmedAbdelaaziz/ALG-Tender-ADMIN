@@ -7,6 +7,8 @@ import 'package:tender_admin/core/themes/colors.dart';
 import 'package:tender_admin/features/announcer/data/models/announcer.model.dart';
 import 'package:tender_admin/features/announcer/modules/singleannouncer/logic/announcer.cubit.dart';
 
+import 'announcer_form.dart';
+
 class Announcer extends StatelessWidget {
   final AnnouncerModel announcer;
   final ValueChanged<AnnouncerModel>? onEdit;
@@ -30,7 +32,9 @@ class Announcer extends StatelessWidget {
               () async {
                 await context.dialogWith<AnnouncerModel>(
                   child: BlocProvider<AnnouncerCubit>(
-                      create: (_) => UpdateAnnouncerCubit(announcer)),
+                    create: (_) => UpdateAnnouncerCubit(announcer),
+                    child: AnnouncerForm(),
+                  ),
                   onResult: onEdit!,
                 );
               },
@@ -53,7 +57,7 @@ class Announcer extends StatelessWidget {
 
   Widget _buildAvatar() {
     return CircleAvatar(
-      radius: 30.r,
+      radius: 45.r,
       backgroundImage: NetworkImage(announcer.imageUri ?? ''),
     );
   }

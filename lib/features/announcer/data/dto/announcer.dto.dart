@@ -9,7 +9,7 @@ part 'update_announcer.dto.dart';
 
 abstract class AnnouncerDto {
   final TextEditingController name;
-  final ImageEditingController? image;
+  final ImageEditingController image;
   final BooleanEditingController isStartup;
 
   AnnouncerDto({
@@ -17,7 +17,7 @@ abstract class AnnouncerDto {
     ImageDTO? image,
     bool isStartup = false,
   })  : name = TextEditingController(text: name),
-        image = image != null ? ImageEditingController(image) : null,
+        image = ImageEditingController(image),
         isStartup = BooleanEditingController(isStartup);
 
   Future<Map<String, dynamic>> toJson();

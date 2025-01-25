@@ -2,7 +2,9 @@ part of 'cloudinary.service.dart';
 
 class WebCloudinaryService extends CloudinaryService<html.File> {
   @override
-  Future<void> _prepareRequest(html.File file) async {
+  Future<http.MultipartRequest> _prepareRequest(
+      html.File file) async {
+    final request = this.request;
     final reader = html.FileReader();
     final completer = Completer<List<int>>();
     reader.onLoadEnd.listen((_) {
@@ -16,5 +18,7 @@ class WebCloudinaryService extends CloudinaryService<html.File> {
       bytes,
       filename: file.name,
     ));
+
+    return request;
   }
 }

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tender_admin/core/themes/colors.dart';
 
 class SubmitButton extends StatelessWidget {
   final bool isLoading;
   final void Function() onTap;
   final String title;
+  final Color color;
+  final Color textColor;
 
   const SubmitButton({
     super.key,
-     required this.title,
-      required this.onTap,
-     this.isLoading = false,
-   
-   
+    required this.title,
+    required this.onTap,
+    this.isLoading = false,
+    this.color = KColors.primary,
+    this.textColor = Colors.white,
   });
 
   @override
@@ -24,8 +27,10 @@ class SubmitButton extends StatelessWidget {
           Container(
             height: 66.h,
             padding: EdgeInsets.symmetric(horizontal: 20.w),
-            decoration: const BoxDecoration(
-              color: Color(0xff005ce8),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.all(Radius.circular(25.r)),
+              border: Border.all(color: textColor),
             ),
             child: Center(
               child: isLoading
@@ -34,9 +39,9 @@ class SubmitButton extends StatelessWidget {
                           AlwaysStoppedAnimation<Color>(Colors.white),
                     )
                   : Text(
-                      'LOGIN',
+                      title,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textColor,
                         fontSize: 20.spMax,
                         fontWeight: FontWeight.w500,
                       ),

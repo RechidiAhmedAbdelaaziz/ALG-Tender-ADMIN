@@ -7,7 +7,7 @@ class CreateAnnouncerDto extends AnnouncerDto {
   Future<Map<String, dynamic>> toJson() async {
     return {
       'name': name.text,
-      'image': await image!.value!.imageUrl,
+      'imageUri': await image.value?.imageUrl,
       'isStartup': isStartup.value,
     };
   }

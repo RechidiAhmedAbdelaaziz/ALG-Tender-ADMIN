@@ -9,30 +9,38 @@ import 'package:tender_admin/core/shared/module/images/singleimage/logic/image.c
 import 'package:tender_admin/core/shared/widgets/check_box.dart';
 import 'package:tender_admin/core/shared/widgets/submit_button.dart';
 import 'package:tender_admin/core/shared/widgets/text_form_field.dart';
+import 'package:tender_admin/core/themes/colors.dart';
 import 'package:tender_admin/features/announcer/modules/singleannouncer/logic/announcer.cubit.dart';
 
-class CreateUpdateAnnouncer extends StatelessWidget {
-  const CreateUpdateAnnouncer({super.key});
+class AnnouncerForm extends StatelessWidget {
+  const AnnouncerForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AnnouncerCubit>();
     final dto = cubit.state.dto;
     return Container(
-      width: 200.w,
+      width: 500.w,
       padding: EdgeInsets.all(20.r),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         spacing: 10.h,
         children: [
           BlocProvider(
             create: (context) =>
-                ImageCubit(cubit.state.dto.image?.value),
+                ImageCubit(cubit.state.dto.image.value),
             child: ImageWidget(
-              high: 50.r,
-              width: 50.r,
+              high: 120.r,
+              width: 120.r,
               radius: 360,
-              onImagePicked: cubit.state.dto.image?.setImage,
+              onImagePicked: (image) {
+                dto.image.setImage(image);
+              },
               canRemove: false,
             ),
           ),
@@ -53,6 +61,15 @@ class CreateUpdateAnnouncer extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              SubmitButton(
+                title: 'Annuler',
+                onTap: () {
+                  context.back();
+                },
+                color: Colors.white,
+                textColor: KColors.primary,
+              ),
+              widthSpace(12),
               Builder(
                 builder: (context) => SubmitButton(
                   title: cubit.isEdit ? 'Modifier' : 'Ajouter',
@@ -61,11 +78,6 @@ class CreateUpdateAnnouncer extends StatelessWidget {
                   ),
                   onTap: cubit.save,
                 ),
-              ),
-              widthSpace(12),
-              SubmitButton(
-                title: 'Annuler',
-                onTap: context.back,
               ),
             ],
           )

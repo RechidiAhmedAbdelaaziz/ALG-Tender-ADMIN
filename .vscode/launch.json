@@ -34,7 +34,9 @@
 			"type": "dart",
 			"program": "lib/main/learn/main_learn.dart",
 			"args": [
-				// "--target" , "lib/main/test/main_test.dart",
+				"--web-port",
+				"8000",
+				"--web-browser-flag=--disable-web-security"
 			]
 		}
 	],

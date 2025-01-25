@@ -12,10 +12,10 @@ class UpdateAnnouncerDto extends AnnouncerDto {
 
   @override
   Future<Map<String, dynamic>> toJson() async {
-    final imageUri = await image!.value!.imageUrl;
+    final imageUri = await image.value!.imageUrl;
     return {
       if (model.name != name.text) 'name': name.text,
-      if (model.imageUri != imageUri) 'image': imageUri,
+      if (model.imageUri != imageUri) 'imageUri': imageUri,
       if (model.isStartup != isStartup.value)
         'isStartup': isStartup.value,
     };

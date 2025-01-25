@@ -25,11 +25,11 @@ abstract class CloudinaryService<TFile>
       ..fields['upload_preset'] = uploadPreset;
   }
 
-  Future<void> _prepareRequest(TFile file);
+  Future<http.MultipartRequest> _prepareRequest(TFile file);
 
   @override
   Future<String> upload(TFile file) async {
-    await _prepareRequest(file);
+   final request =  await _prepareRequest(file);
 
     // Send the request
     final response =

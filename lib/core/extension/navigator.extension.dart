@@ -27,5 +27,5 @@ extension NavigatorExtension on BuildContext {
     );
   }
 
-  void back<T>([T? result]) => pop(result); 
+  void back<T>([T? result]) => Navigator.of(this).pop(result);
 }
