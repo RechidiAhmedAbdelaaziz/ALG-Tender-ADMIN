@@ -3,17 +3,14 @@ import 'package:tender_admin/core/extension/list.extension.dart';
 import 'package:tender_admin/core/network/models/api_error.model.dart';
 import 'package:tender_admin/core/network/models/api_response.model.dart';
 
-
 part 'api_result.type.freezed.dart';
 
 @Freezed()
-abstract class ApiResult<T>
-    with _$ApiResult<T> {
+abstract class ApiResult<T> with _$ApiResult<T> {
   const factory ApiResult.success(T data) = _Success<T>;
   const factory ApiResult.error(ApiErrorModel errorHandler) =
       _Failure<T>;
 }
-
 
 class PaginationResult<T> {
   final Pagination pagination;
@@ -27,8 +24,9 @@ class PaginationResult<T> {
   PaginationResult<T> add(T item) =>
       copyWith(data: data.withUnique(item));
 
-  PaginationResult<T> addAll(List<T> items) =>
-      copyWith(data: data.withAllUnique(items));
+  PaginationResult<T> addAll(PaginationResult<T> result) => copyWith(
+      data: data.withAllUnique(result.data),
+      pagination: result.pagination);
 
   PaginationResult<T> remove(T item) =>
       copyWith(data: data.withRemove(item));

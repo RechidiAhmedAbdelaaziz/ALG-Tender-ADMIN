@@ -13,7 +13,7 @@ class ImageWidget extends StatelessWidget {
   final bool canEdit;
   final bool canRemove;
 
-  final void Function(ImageDTO)? onImagePicked;
+  final void Function(ImageDTO imageDto)? onImagePicked;
   final void Function()? onImageRemoved;
 
   const ImageWidget({

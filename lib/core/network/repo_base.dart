@@ -7,6 +7,8 @@ typedef RepoResult<T> = Future<ApiResult<T>>;
 typedef RepoListResult<T> = Future<ApiResult<PaginationResult<T>>>;
 
 class NetworkRepository {
+
+
   Future<ApiResult<T>> tryApiCall<T>(Future<T> Function() apiCall) async {
     try {
       return ApiResult.success(await apiCall());

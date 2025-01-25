@@ -6,6 +6,8 @@ import 'package:tender_admin/core/router/router.dart';
 import 'package:tender_admin/core/services/cloudstorage/cloud_storage.service.dart';
 import 'package:tender_admin/core/services/cloudstorage/cloudinary/cloudinary.service.dart';
 import 'package:tender_admin/core/services/dio/dio.service.dart';
+import 'package:tender_admin/features/announcer/config/announcer.dependency.dart';
+import 'package:tender_admin/features/auth/configs/auth.dependency.dart';
 
 part 'dependecy_base.dart';
 

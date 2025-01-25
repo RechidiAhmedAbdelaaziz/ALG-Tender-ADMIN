@@ -4,7 +4,10 @@ abstract class DependecyBase {
   void init();
 
   static Future<void> _init() async {
-    final dependencies = <DependecyBase>[];
+    final dependencies = <DependecyBase>[
+      AuthDependency(),
+      AnnouncerDependency()
+    ];
 
     for (final dependency in dependencies) {
       dependency.init();
