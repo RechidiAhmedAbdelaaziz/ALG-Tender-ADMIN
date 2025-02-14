@@ -39,7 +39,7 @@ extension ListExtension<T> on List<T> {
     return this;
   }
 
-  List<T> withRemove(T item) {
+  List<T> without(T item) {
     final index = indexWhere((e) => e == item);
     if (index == -1) return this;
     removeAt(index);

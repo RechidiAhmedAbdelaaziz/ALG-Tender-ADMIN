@@ -10,7 +10,7 @@ class AnnouncerRepo extends NetworkRepository {
   final _announcerApi = locator<AnnouncerApi>();
 
   RepoListResult<AnnouncerModel> getAnnouncers(
-      PagiantionDto dto) async {
+      PaginationDto dto) async {
     apicall() async {
       final response =
           await _announcerApi.getAnnouncers(dto.toJson());

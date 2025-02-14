@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tender_admin/core/shared/classes/editioncontollers/number_editingcontroller.dart';
 
-class PagiantionDto {
+class PaginationDto {
   final IntegerEditingController page;
   final IntegerEditingController limit;
   final TextEditingController keyword;
   final TextEditingController fields;
   final TextEditingController sort;
 
-  PagiantionDto({
+  PaginationDto({
     int page = 1,
     int limit = 10,
     String? keyword,
@@ -35,4 +35,7 @@ class PagiantionDto {
     fields.dispose();
     sort.dispose();
   }
+
+  void nextPage() => page.increment();
+  void firstPage() => page.setValue(1);
 }

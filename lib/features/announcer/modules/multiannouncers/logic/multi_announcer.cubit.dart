@@ -11,7 +11,7 @@ part 'multi_announcer.state.dart';
 
 class MultiAnnouncerCubit extends Cubit<MultiAnnouncerState> {
   final _announcerRepo = locator<AnnouncerRepo>();
-  final _paginationDto = PagiantionDto();
+  final _paginationDto = PaginationDto();
 
   MultiAnnouncerCubit() : super(MultiAnnouncerState.initial());
 

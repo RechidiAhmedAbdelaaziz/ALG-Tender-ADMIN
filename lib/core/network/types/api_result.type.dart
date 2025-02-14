@@ -29,7 +29,7 @@ class PaginationResult<T> {
       pagination: result.pagination);
 
   PaginationResult<T> remove(T item) =>
-      copyWith(data: data.withRemove(item));
+      copyWith(data: data.without(item));
 
   PaginationResult<T> replace(T item) =>
       copyWith(data: data.withReplace(item));

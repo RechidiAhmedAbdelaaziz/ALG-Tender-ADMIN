@@ -5,7 +5,7 @@ import 'package:tender_admin/core/shared/dto/imagedto/image.dto.dart';
 import 'logic/image.cubit.dart';
 
 class ImageWidget extends StatelessWidget {
-  final double high;
+  final double height;
   final double width;
   final double radius;
   final ImageDTO? imageDTO;
@@ -18,7 +18,7 @@ class ImageWidget extends StatelessWidget {
 
   const ImageWidget({
     super.key,
-    required this.high,
+    required this.height,
     required this.width,
     required this.radius,
     this.onImagePicked,
@@ -37,8 +37,8 @@ class ImageWidget extends StatelessWidget {
       },
       child:
           context.select((ImageCubit cubit) => cubit.state.isPicked)
-              ? _Image(high, width, radius, canEdit, canRemove)
-              : _ImagePicker(high, width, radius),
+              ? _Image(height, width, radius, canEdit, canRemove)
+              : _ImagePicker(height, width, radius),
     );
   }
 }

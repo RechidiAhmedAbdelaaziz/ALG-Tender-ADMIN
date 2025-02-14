@@ -1,10 +1,11 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'newspaper.model.g.dart';
 
 @JsonSerializable(createToJson: false)
-class NewsPaperModel {
-  NewsPaperModel({
+class NewsPaperModel extends Equatable {
+  const NewsPaperModel({
     this.id,
     this.name,
     this.imageUri,
@@ -17,4 +18,7 @@ class NewsPaperModel {
 
   factory NewsPaperModel.fromJson(Map<String, dynamic> json) =>
       _$NewsPaperModelFromJson(json);
+
+  @override
+  List<Object?> get props => [id];
 }

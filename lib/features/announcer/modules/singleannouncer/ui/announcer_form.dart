@@ -35,7 +35,7 @@ class AnnouncerForm extends StatelessWidget {
             create: (context) =>
                 ImageCubit(cubit.state.dto.image.value),
             child: ImageWidget(
-              high: 120.r,
+              height: 120.r,
               width: 120.r,
               radius: 360,
               onImagePicked: (image) {

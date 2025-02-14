@@ -11,10 +11,12 @@ part 'mobile_image.dto.dart';
 part 'remote_image.dto.dart';
 part 'web_image.dto.dart';
 
-abstract class ImageDTO {
+abstract class ImageDTO   {
   Future<ImageProvider> get image;
 
   Future<String> get imageUrl;
+
+  
 }
 
 extension ImagesDtoMapper on List<ImageDTO> {
