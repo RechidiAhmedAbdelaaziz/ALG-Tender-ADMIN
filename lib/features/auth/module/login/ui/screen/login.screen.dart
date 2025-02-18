@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tender_admin/core/di/locator.dart';
+import 'package:tender_admin/core/extension/navigator.extension.dart';
+import 'package:tender_admin/core/extension/snackbar.extension.dart';
 import 'package:tender_admin/core/extension/validator.extension.dart';
 import 'package:tender_admin/core/shared/classes/dimensions.dart';
 import 'package:tender_admin/core/shared/widgets/text_form_field.dart';
+import 'package:tender_admin/features/tender/config/tender.navigator.dart';
 
 import '../../../../logic/auth.cubit.dart';
 import '../../logic/login.cubit.dart';
-
 
 part '../widget/submit_button.dart';
 part '../widget/login_form.dart';
@@ -20,11 +22,14 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void goToHome() => context.to(TenderNavigator.createTender());
+
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {
+        state.onError(context.showErrorSnackbar);
         state.onLoginSuccess((tokens) async {
           await locator<AuthCubit>().authenticate(tokens);
-          //TODO go to home screen
+          goToHome();
         });
       },
       child: Scaffold(

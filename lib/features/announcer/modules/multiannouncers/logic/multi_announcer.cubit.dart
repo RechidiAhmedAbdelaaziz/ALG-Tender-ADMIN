@@ -17,6 +17,7 @@ class MultiAnnouncerCubit extends Cubit<MultiAnnouncerState> {
 
   void search() {
     _paginationDto.page.setValue(1);
+    state._result.clear();
     load();
   }
 

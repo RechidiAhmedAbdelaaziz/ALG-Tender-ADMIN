@@ -44,6 +44,8 @@ class PaginationResult<T> {
     );
   }
 
+  void clear() => data.clear();
+
   PaginationResult.fromResponse({
     required PaginatedDataResponse response,
     required T Function(Map<String, dynamic>) fromJson,

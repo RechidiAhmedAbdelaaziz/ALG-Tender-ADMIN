@@ -14,11 +14,11 @@ class SourceModel extends Equatable {
 
   factory SourceModel.fromJson(Map<String, dynamic> json) {
     return SourceModel(
-      newspaper: json['newspaper'] != null
-          ? NewsPaperModel.fromJson(json['newspaper'])
+      newspaper: json['newsPaper'] != null
+          ? NewsPaperModel.fromJson(json['newsPaper'])
           : null,
       images: json['images'] != null
-          ? (json['images'] as List<String>)
+          ? (json['images'] as List<dynamic>)
               .map((e) => RemoteImageDTO(url: e))
               .toList()
           : null,

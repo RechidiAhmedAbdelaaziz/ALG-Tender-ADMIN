@@ -44,11 +44,15 @@ class NewsPapers extends StatelessWidget {
 class NewsPaper extends StatelessWidget {
   final NewsPaperModel newspaper;
   final bool _canSelect;
+  final bool canEdit;
+  final bool canDelete;
 
   const NewsPaper(
     this.newspaper, {
     super.key,
     bool canSelect = false,
+    this.canEdit = true,
+    this.canDelete = true,
   }) : _canSelect = canSelect;
 
   @override
@@ -103,37 +107,41 @@ class NewsPaper extends StatelessWidget {
                 heightSpace(10),
                 Row(
                   children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.edit,
-                        color:
-                            isSelected ? Colors.white : Colors.black,
-                      ),
-                      onPressed: () {
-                        context.dialogWith<UpdateNewspaperDto>(
-                          child: NewspaperForm(newspaper: newspaper),
-                          onResult: context
-                              .read<NewsPaperCubit>()
-                              .updateNewsPaper,
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                      onPressed: () => context.alertDialog(
-                        title: 'Supprimer',
-                        content:
-                            'Voulez-vous vraiment supprimer ce journal ?',
-                        onConfirm: () {
-                          context
-                              .read<NewsPaperCubit>()
-                              .deleteNewsPaper(newspaper);
+                    if (canEdit)
+                      IconButton(
+                        icon: Icon(
+                          Icons.edit,
+                          color: isSelected
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                        onPressed: () {
+                          context.dialogWith<UpdateNewspaperDto>(
+                            child:
+                                NewspaperForm(newspaper: newspaper),
+                            onResult: context
+                                .read<NewsPaperCubit>()
+                                .updateNewsPaper,
+                          );
                         },
                       ),
-                    ),
+                    if (canDelete)
+                      IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                        onPressed: () => context.alertDialog(
+                          title: 'Supprimer',
+                          content:
+                              'Voulez-vous vraiment supprimer ce journal ?',
+                          onConfirm: () {
+                            context
+                                .read<NewsPaperCubit>()
+                                .deleteNewsPaper(newspaper);
+                          },
+                        ),
+                      ),
                   ],
                 ),
               ],

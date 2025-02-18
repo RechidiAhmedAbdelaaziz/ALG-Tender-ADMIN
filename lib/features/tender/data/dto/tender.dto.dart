@@ -12,10 +12,10 @@ part 'update_tender.dto.dart';
 
 abstract class TenderDto extends CreateUpdateDto {
   final TextEditingController title;
-  final Editingcontroller<AnnouncerModel> announcer;
-  final Editingcontroller<DateTime> publishedDate;
-  final Editingcontroller<DateTime> closingDate;
-  final Editingcontroller<num> chargePrice;
+  final EditingController<AnnouncerModel> announcer;
+  final EditingController<DateTime> publishedDate;
+  final EditingController<DateTime> closingDate;
+  final TextEditingController chargePrice;
   final TextEditingController industry;
   final TextEditingController marketType;
   final TextEditingController region;

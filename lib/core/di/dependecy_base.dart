@@ -1,13 +1,14 @@
 part of 'locator.dart';
 
-abstract class DependecyBase {
+abstract class FeaturesDependency {
   void init();
 
   static Future<void> _init() async {
-    final dependencies = <DependecyBase>[
+    final dependencies = <FeaturesDependency>[
       AuthDependency(),
       AnnouncerDependency(),
       NewspaperDependency(),
+      TenderDependency(),
     ];
 
     for (final dependency in dependencies) {

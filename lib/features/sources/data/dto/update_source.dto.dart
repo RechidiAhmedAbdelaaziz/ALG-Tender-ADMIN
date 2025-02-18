@@ -6,7 +6,7 @@ class UpdateSourceDto extends SourceDTO {
   UpdateSourceDto(this.source)
       : super(
           newsPaper:
-              Editingcontroller<NewsPaperModel>(source.newspaper),
+              EditingController<NewsPaperModel>(source.newspaper),
           images:
               ListEditingcontroller<ImageDTO>(source.images ?? []),
         );
@@ -15,7 +15,7 @@ class UpdateSourceDto extends SourceDTO {
   @override
   Future<Map<String, dynamic>> toMap() async {
     final urls = await _images.value.imageUrls;
-    final sourceUrls = await source.images!.imageUrls;
+    final sourceUrls = await (source.images ?? []).imageUrls;
 
     final imagesToDelete = sourceUrls
         .where((element) => !urls.contains(element))
@@ -28,7 +28,7 @@ class UpdateSourceDto extends SourceDTO {
     return imagesToAdd.isEmpty && imagesToDelete.isEmpty
         ? {}
         : {
-            'newsPaper': source.newspaper!.id,
+            'newsPaper': newsPaper!.id,
             'imagesToAdd': imagesToAdd,
             'imagesToRemove': imagesToDelete,
           };

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Editingcontroller<T> extends ValueNotifier<T?> {
-  Editingcontroller([super._value]);
+class EditingController<T> extends ValueNotifier<T?> {
+  EditingController([super._value]);
 
   void setValue(T value) => this.value = value;
+
+  void clear() => value = null;
 }

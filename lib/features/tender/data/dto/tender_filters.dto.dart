@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:tender_admin/core/extension/map.extension.dart';
 import 'package:tender_admin/core/shared/classes/editioncontollers/generic_editingcontroller.dart';
+import 'package:tender_admin/core/shared/classes/editioncontollers/list_generic_editingcontroller.dart';
 import 'package:tender_admin/core/shared/dto/pagination/pagination.dto.dart';
 import 'package:tender_admin/features/announcer/data/models/announcer.model.dart';
 
 class TenderFiltersDto extends PaginationDto {
-  final Editingcontroller<AnnouncerModel> announcer;
-  final Editingcontroller<DateTime> publishedAfter;
-  final Editingcontroller<DateTime> closingBefore;
+  final EditingController<AnnouncerModel> announcer;
+  final EditingController<DateTime> publishedAfter;
+  final EditingController<DateTime> closingBefore;
   final TextEditingController marketType;
-  final Editingcontroller<String> industries;
-  final Editingcontroller<bool> isStartup;
-  final Editingcontroller<String> regions;
+  final ListEditingcontroller<String> industries;
+  final EditingController<bool> isStartup;
+  final ListEditingcontroller<String> regions;
 
   TenderFiltersDto()
-      : announcer = Editingcontroller<AnnouncerModel>(),
-        publishedAfter = Editingcontroller<DateTime>(),
-        closingBefore = Editingcontroller<DateTime>(),
+      : announcer = EditingController<AnnouncerModel>(),
+        publishedAfter = EditingController<DateTime>(),
+        closingBefore = EditingController<DateTime>(),
         marketType = TextEditingController(),
-        industries = Editingcontroller<String>(),
-        isStartup = Editingcontroller<bool>(),
-        regions = Editingcontroller<String>();
+        industries = ListEditingcontroller<String>(),
+        isStartup = EditingController<bool>(),
+        regions = ListEditingcontroller<String>();
 
   @override
   Map<String, dynamic> toJson() {
@@ -28,10 +29,17 @@ class TenderFiltersDto extends PaginationDto {
     json['announcer'] = announcer.value?.id;
     json['publishedAfter'] = publishedAfter.value?.toIso8601String();
     json['closingBefore'] = closingBefore.value?.toIso8601String();
-    json['marketType'] = marketType.text;
-    json['industries'] = industries.value;
-    json['isStartup'] = isStartup.value;
-    json['regions'] = regions.value;
+
+    if (marketType.text.isNotEmpty) {
+      json['marketType'] = marketType.text;
+    }
+
+    if (industries.value.isNotEmpty) {
+      json['industries'] = industries.value;
+    }
+
+    if (isStartup.value == true) json['isStartup'] = isStartup.value;
+    if (regions.value.isNotEmpty) json['regions'] = regions.value;
     return json.withoutNulls();
   }
 
@@ -45,5 +53,15 @@ class TenderFiltersDto extends PaginationDto {
     isStartup.dispose();
     regions.dispose();
     super.dispose();
+  }
+
+  void clear() {
+    announcer.clear();
+    publishedAfter.clear();
+    closingBefore.clear();
+    marketType.clear();
+    industries.clear();
+    isStartup.clear();
+    regions.clear();
   }
 }

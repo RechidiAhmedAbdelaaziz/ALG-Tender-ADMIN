@@ -9,6 +9,11 @@ abstract class AuthCache {
   Future<String?> get accessToken;
   Future<String?> get refreshToken;
   Future<void> clearTokens();
+
+  Future<bool> get isAuth async {
+    final accessToken = await this.accessToken;
+    return accessToken != null;
+  }
 }
 
 class SecureAuthCache extends AuthCache {

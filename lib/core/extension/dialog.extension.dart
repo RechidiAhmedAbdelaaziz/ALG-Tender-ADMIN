@@ -32,9 +32,11 @@ extension DialogExtension on BuildContext {
     required Widget child,
     required void Function(T) onResult,
     VoidCallback? onError,
+    bool autoBack = true,
   }) async {
     final result = await dialog<T>(child: child);
     result != null ? onResult(result) : onError?.call();
+    if (autoBack) back();
   }
 
   /// Show a alert dialog with the given [title] and [content].

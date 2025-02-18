@@ -7,23 +7,28 @@ class _AnnouncersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MultiAnnouncerCubit, MultiAnnouncerState>(
-      buildWhen: (previous, current) => previous.isLoading,
       builder: (context, state) {
         final cubit = context.read<MultiAnnouncerCubit>();
         final announcers = state.announcers;
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              ...announcers.map((announcer) {
-                return Announcer(
-                  announcer,
-                  onEdit: cubit.update,
-                  onDelete: cubit.remove,
-                );
-              }),
-              if (state.isLoading) const LinearProgressIndicator(),
-            ],
-          ),
+        return PaginationBuilder(
+          items: announcers,
+          onLoadMore: cubit.load,
+          isLoading: context.select(
+              (MultiAnnouncerCubit cubit) => cubit.state.isLoading),
+          separator: Divider(),
+          itemBuilder: (announcer) {
+            return InkWell(
+              onTap: () {
+                onSelecte(announcer);
+                Navigator.of(context).pop();
+              },
+              child: Announcer(
+                announcer,
+                onEdit: cubit.update,
+                onDelete: cubit.remove,
+              ),
+            );
+          },
         );
       },
     );

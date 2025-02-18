@@ -7,6 +7,7 @@ class _AuthTokenInterceptor extends InterceptorsWrapper {
     // final accessToken = await authCacheHelper.accessToken;
     //       options.headers['Authorization'] = 'Bearer $accessToken';
     //       return handler.next(options);
+    super.onRequest(options, handler);
   }
 
   _AuthTokenInterceptor._();

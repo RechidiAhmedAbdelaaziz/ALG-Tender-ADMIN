@@ -20,13 +20,9 @@ class _Drawer extends StatelessWidget {
               title: 'Tenders',
               icon: KIcons.tenders,
               routeName: AppRoutes.tender,
-              onTap: () {
-                //TODO go to tenders screen
-              },
+              onTap: () => context.to(TenderNavigator.tenders()),
             ),
-          ].map((item) {
-            return _buildDrawerItem(item, context);
-          }),
+          ].map((item) => _buildDrawerItem(item, context)),
           const Spacer(),
           Padding(
             padding: EdgeInsets.only(bottom: 40.h),

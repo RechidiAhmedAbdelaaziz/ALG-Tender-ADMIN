@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tender_admin/core/router/router.dart';
 import 'package:tender_admin/core/router/routes.dart';
+import 'package:tender_admin/features/tender/config/tender.route.dart';
 
 import '../ui/screen/home.screen.dart';
 
@@ -20,8 +21,14 @@ class HomeRoute extends AppRouteBase {
   @override
   RouteBase get route => ShellRoute(
         builder: _homePageBuilder,
-        routes:[
-          //TODO add nested routes here
-        ],
+        routes: _buildRoutes(),
       );
+
+  List<RouteBase> _buildRoutes() {
+    return [
+      TenderRoute.tenders(),
+      TenderRoute.createTender(),
+      TenderRoute.updateTender(),
+    ].map((e) => e.route).toList();
+  }
 }

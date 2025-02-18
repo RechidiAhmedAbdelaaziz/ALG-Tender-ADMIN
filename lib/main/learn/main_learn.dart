@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tender_admin/core/di/locator.dart';
-import 'package:tender_admin/core/extension/dialog.extension.dart';
-import 'package:tender_admin/features/sources/data/dto/source.dto.dart';
-import 'package:tender_admin/features/sources/modules/sourceform/source_form.dart';
+import 'package:tender_admin/features/tender/modules/tenderform/logic/tender.cubit.dart';
+import 'package:tender_admin/features/tender/modules/tenderform/view/tender_form.dart';
 
 void main() async {
   // ensure initializeApp is called
@@ -54,38 +54,46 @@ class TestApp extends StatelessWidget {
                 return Center(
                   child: Column(
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          context.dialogWith<SourceDTO>(
-                            child: SizedBox(
-                              height: 850.h,
-                              width: 600.w,
-                              child: SourceForm(
-                                  // update: true,
-                                  // source: UpdateSourceDto(
-                                  //   SourceModel(
-                                  //     images: [
-                                  //       RemoteImageDTO(
-                                  //           url:
-                                  //               'https://i.pinimg.com/236x/de/6e/78/de6e787cb977a1a6882c83c38813e4a2.jpg')
-                                  //     ],
-                                  //     newspaper: NewsPaperModel(
-                                  //       id: '1',
-                                  //       name: 'Test',
-                                  //       imageUri:
-                                  //           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWm7ZTeuzMAcQrsMg1hirVRWXdJQtIHiv_KA&s',
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  ),
-                            ),
-                            onResult: (dto) {
-                              print(dto);
-                            },
-                          );
-                        },
-                        icon: Icon(Icons.ac_unit_sharp),
-                      )
+                      // IconButton(
+                      //   onPressed: () {
+                      //     context.dialogWith<SourceDTO>(
+                      //       child: SizedBox(
+                      //         height: 850.h,
+                      //         width: 600.w,
+                      //         child: SourceForm(
+                      //             // update: true,
+                      //             // source: UpdateSourceDto(
+                      //             //   SourceModel(
+                      //             //     images: [
+                      //             //       RemoteImageDTO(
+                      //             //           url:
+                      //             //               'https://i.pinimg.com/236x/de/6e/78/de6e787cb977a1a6882c83c38813e4a2.jpg')
+                      //             //     ],
+                      //             //     newspaper: NewsPaperModel(
+                      //             //       id: '1',
+                      //             //       name: 'Test',
+                      //             //       imageUri:
+                      //             //           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWm7ZTeuzMAcQrsMg1hirVRWXdJQtIHiv_KA&s',
+                      //             //     ),
+                      //             //   ),
+                      //             // ),
+                      //             ),
+                      //       ),
+                      //       onResult: (dto) {
+                      //         print(dto);
+                      //       },
+                      //     );
+                      //   },
+                      //   icon: Icon(Icons.ac_unit_sharp),
+                      // )
+
+                      Expanded(
+                        child: BlocProvider(
+                          create: (context) =>
+                              TenderCubit()..loadTender(),
+                          child: TenderForm(),
+                        ),
+                      ),
                     ],
                   ),
                 );

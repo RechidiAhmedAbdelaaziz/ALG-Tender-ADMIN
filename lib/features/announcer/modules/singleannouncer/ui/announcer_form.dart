@@ -19,69 +19,72 @@ class AnnouncerForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<AnnouncerCubit>();
     final dto = cubit.state.dto;
-    return Container(
-      width: 500.w,
-      padding: EdgeInsets.all(20.r),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 10.h,
-        children: [
-          BlocProvider(
-            create: (context) =>
-                ImageCubit(cubit.state.dto.image.value),
-            child: ImageWidget(
-              height: 120.r,
-              width: 120.r,
-              radius: 360,
-              onImagePicked: (image) {
-                dto.image.setImage(image);
-              },
-              canRemove: false,
-            ),
-          ),
-          AppTextFormField(
-            controller: dto.name,
-            title: 'Le nom de l\'annonceur',
-            validator: (value) {
-              return value.isValidName
-                  ? 'Le nom de l\'annonceur est requis'
-                  : null;
-            },
-          ),
-          AppCheckBox(
-            controller: dto.isStartup,
-            title: 'Est une startup',
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SubmitButton(
-                title: 'Annuler',
-                onTap: () {
-                  context.back();
+    return BlocListener<AnnouncerCubit, AnnouncerState>(
+      listener: (context, state) {
+        state.onSaved((announcer) => context.back(announcer));
+      },
+      child: Container(
+        width: 500.w,
+        padding: EdgeInsets.all(20.r),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 10.h,
+          children: [
+            BlocProvider(
+              create: (context) =>
+                  ImageCubit(cubit.state.dto.image.value),
+              child: ImageWidget(
+                height: 120.r,
+                width: 120.r,
+                radius: 360,
+                onImagePicked: (image) {
+                  dto.image.setImage(image);
                 },
-                color: Colors.white,
-                textColor: KColors.primary,
+                canRemove: false,
               ),
-              widthSpace(12),
-              Builder(
-                builder: (context) => SubmitButton(
-                  title: cubit.isEdit ? 'Modifier' : 'Ajouter',
-                  isLoading: context.select(
-                    (AnnouncerCubit cubit) => cubit.state.isLoading,
-                  ),
-                  onTap: cubit.save,
+            ),
+            AppTextFormField(
+              controller: dto.name,
+              title: 'Le nom de l\'annonceur',
+              validator: (value) {
+                return value.isValidName
+                    ? 'Le nom de l\'annonceur est requis'
+                    : null;
+              },
+            ),
+            AppCheckBox(
+              controller: dto.isStartup,
+              title: 'Est une startup',
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SubmitButton(
+                  title: 'Annuler',
+                  onTap: () => context.back(),
+                  color: Colors.white,
+                  textColor: KColors.primary,
                 ),
-              ),
-            ],
-          )
-        ],
+                widthSpace(12),
+                Builder(
+                  builder: (context) => SubmitButton(
+                    title: cubit.isEdit ? 'Modifier' : 'Ajouter',
+                    isLoading: context.select(
+                      (AnnouncerCubit cubit) => cubit.state.isLoading,
+                    ),
+                    onTap: cubit.save,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

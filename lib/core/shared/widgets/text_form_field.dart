@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextFormField extends StatefulWidget {
@@ -13,6 +14,8 @@ class AppTextFormField extends StatefulWidget {
   final bool readOnly;
   final bool enabled;
   final int maxLines;
+  final List<TextInputFormatter>? inputFormatters;
+
 
   const AppTextFormField({
     super.key,
@@ -27,6 +30,7 @@ class AppTextFormField extends StatefulWidget {
     this.readOnly = false,
     this.enabled = true,
     this.maxLines = 1,
+    this.inputFormatters,
   });
 
   @override
@@ -52,6 +56,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
             ),
           ),
         TextFormField(
+          inputFormatters: widget.inputFormatters,
           controller: widget.controller,
           validator: widget.validator,
           onChanged: widget.onChanged,

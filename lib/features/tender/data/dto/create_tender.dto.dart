@@ -4,12 +4,12 @@ class CreateTenderDTO extends TenderDto {
   CreateTenderDTO()
       : super._(
           title: TextEditingController(),
-          announcer: Editingcontroller(),
-          chargePrice: Editingcontroller(),
-          closingDate: Editingcontroller(),
+          announcer: EditingController(),
+          chargePrice: TextEditingController(),
+          closingDate: EditingController(),
           industry: TextEditingController(),
           marketType: TextEditingController(),
-          publishedDate: Editingcontroller(),
+          publishedDate: EditingController(),
           region: TextEditingController(),
           sources: ListEditingcontroller(),
         );
@@ -21,12 +21,12 @@ class CreateTenderDTO extends TenderDto {
       'announcer': announcer.value?.id,
       'publishedDate': publishedDate.value?.toIso8601String(),
       'closingDate': closingDate.value?.toIso8601String(),
-      'chargePrice': chargePrice.value,
+      'chargePrice': int.tryParse(chargePrice.text),
       'industry': industry.text,
       'marketType': marketType.text,
       'region': region.text,
-      'sources':
-          await Future.wait(sources.value.map((e) => e.toMap())),
+      'sources': await Future.wait(
+          sources.value.map((e) async => await e.toMap())),
     }.withoutNulls();
   }
 }

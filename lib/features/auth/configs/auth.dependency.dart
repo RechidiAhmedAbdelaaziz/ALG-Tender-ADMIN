@@ -6,7 +6,7 @@ import '../data/sources/auth.api.dart';
 import '../data/sources/auth.cache.dart';
 import '../logic/auth.cubit.dart';
 
-class AuthDependency extends DependecyBase {
+class AuthDependency extends FeaturesDependency {
   @override
   void init() async {
     locator.registerLazySingleton(() => AuthApi(locator()));

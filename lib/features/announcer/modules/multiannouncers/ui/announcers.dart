@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tender_admin/core/extension/dialog.extension.dart';
 import 'package:tender_admin/core/extension/snackbar.extension.dart';
 import 'package:tender_admin/core/shared/classes/dimensions.dart';
+import 'package:tender_admin/core/shared/widgets/pagination_builder.dart';
 import 'package:tender_admin/core/shared/widgets/search_bar.dart';
 import 'package:tender_admin/features/announcer/data/models/announcer.model.dart';
 import 'package:tender_admin/features/announcer/modules/singleannouncer/logic/announcer.cubit.dart';

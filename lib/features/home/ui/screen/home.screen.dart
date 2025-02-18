@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tender_admin/core/di/locator.dart';
+import 'package:tender_admin/core/extension/navigator.extension.dart';
 import 'package:tender_admin/core/router/routes.dart';
 import 'package:tender_admin/core/shared/classes/dimensions.dart';
 import 'package:tender_admin/core/themes/colors.dart';
 import 'package:tender_admin/core/themes/icons.dart';
 import 'package:tender_admin/features/auth/logic/auth.cubit.dart';
+import 'package:tender_admin/features/tender/config/tender.navigator.dart';
 
 
 part '../widget/drawer.dart';

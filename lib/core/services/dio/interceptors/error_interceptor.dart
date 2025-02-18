@@ -1,6 +1,6 @@
 part of 'dio_interceptors.dart';
-class DioErrorInterceptor extends InterceptorsWrapper {
 
+class DioErrorInterceptor extends InterceptorsWrapper {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     //       if (error.response?.statusCode == 401) {
@@ -19,6 +19,7 @@ class DioErrorInterceptor extends InterceptorsWrapper {
     //     },
     //   );
     // }
+    super.onError(err, handler);
   }
 
   DioErrorInterceptor._();

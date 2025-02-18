@@ -3,6 +3,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tender_admin/features/auth/configs/auth.route.dart';
+import 'package:tender_admin/features/auth/data/sources/auth.cache.dart';
+import 'package:tender_admin/features/auth/module/login/ui/screen/login.screen.dart';
+import 'package:tender_admin/features/home/configs/home.route.dart';
 
 import '../di/locator.dart';
 
@@ -21,12 +25,16 @@ class AppRouter {
   void offAll(AppNavigatorBase navigator) => navigator._offAll();
 
   static List<RouteBase> _generateRoutes() {
-    final bases = <AppRouteBase>[];
+    final bases = <AppRouteBase>[
+      AuthRoute.login(),
+      HomeRoute(),
+    ];
     return bases.map((base) => base.route).toList();
   }
 
-  static FutureOr<String?> _handelRedirect(context, state) {
-    //TODO implement redirect
-    throw UnimplementedError();
+  static FutureOr<String?> _handelRedirect(context, state) async {
+    final authCache = locator<AuthCache>();
+    if (await authCache.isAuth) return null;
+    return LoginScreen.route;
   }
 }

@@ -24,7 +24,7 @@ class MultiAnnouncerState extends ErrorState {
   MultiAnnouncerState _loaded(
           PaginationResult<AnnouncerModel> result) =>
       _copyWith(
-        result: result.addAll(result),
+        result: _result.addAll(result),
         state: _AnnouncersStates.loaded,
       );
 

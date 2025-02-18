@@ -5,12 +5,13 @@ class UpdateTenderDTO extends TenderDto {
   UpdateTenderDTO(this._tender)
       : super._(
           title: TextEditingController(text: _tender.title),
-          announcer: Editingcontroller(_tender.announcer),
-          chargePrice: Editingcontroller(_tender.chargePrice),
-          closingDate: Editingcontroller(_tender.closingDate),
+          announcer: EditingController(_tender.announcer),
+          chargePrice: TextEditingController(
+              text: _tender.chargePrice?.toString()),
+          closingDate: EditingController(_tender.closingDate),
           industry: TextEditingController(text: _tender.industry),
           marketType: TextEditingController(text: _tender.marketType),
-          publishedDate: Editingcontroller(_tender.publishedDate),
+          publishedDate: EditingController(_tender.publishedDate),
           region: TextEditingController(text: _tender.region),
           sources: ListEditingcontroller(
             _tender.sources
@@ -20,9 +21,13 @@ class UpdateTenderDTO extends TenderDto {
           ),
         );
 
+  String get id {
+    return _tender.id!;
+  }
+
   @override
   Future<Map<String, dynamic>> toMap() async {
-    return {
+    final json = {
       if (title.text != _tender.title) 'title': title.text,
       if (announcer.value?.id != _tender.announcer?.id)
         'announcer': announcer.value?.id,
@@ -30,8 +35,8 @@ class UpdateTenderDTO extends TenderDto {
         'publishedDate': publishedDate.value?.toIso8601String(),
       if (closingDate.value != _tender.closingDate)
         'closingDate': closingDate.value?.toIso8601String(),
-      if (chargePrice.value != _tender.chargePrice)
-        'chargePrice': chargePrice.value,
+      if (chargePrice.text != _tender.chargePrice?.toString())
+        'chargePrice': int.tryParse(chargePrice.text),
       if (industry.text != _tender.industry)
         'industry': industry.text,
       if (marketType.text != _tender.marketType)
@@ -39,10 +44,18 @@ class UpdateTenderDTO extends TenderDto {
       if (region.text != _tender.region) 'region': region.text,
       if (sources.value.isNotEmpty)
         'sources': await Future.wait(
-          sources.value
-              .whereType<UpdateSourceDto>()
-              .map((e) => e.toMap()),
+          sources.value.whereType<UpdateSourceDto>().map((e) {
+            return e.toMap();
+          }),
         ),
     }.withoutNulls();
+
+    (json['sources'] as List<dynamic>)
+        .removeWhere((value) => value['newsPaper'] == null);
+    if ((json['sources'] as List<dynamic>).isEmpty) {
+      json.remove('sources');
+    }
+
+    return json;
   }
 }

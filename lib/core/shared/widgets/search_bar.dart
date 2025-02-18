@@ -8,10 +8,12 @@ import 'package:tender_admin/core/themes/colors.dart';
 class KSearchBar extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback onSearch;
+  final double? width;
   const KSearchBar({
     super.key,
     required this.controller,
     required this.onSearch,
+    this.width,
   });
 
   @override
@@ -31,7 +33,7 @@ class _KSearchBarState extends State<KSearchBar> {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
 
     _debounce = Timer(
-      const Duration(milliseconds: 500),
+      const Duration(milliseconds: 800),
       () => widget.onSearch(),
     );
   }
@@ -40,6 +42,7 @@ class _KSearchBarState extends State<KSearchBar> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
+      width: widget.width,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.r),

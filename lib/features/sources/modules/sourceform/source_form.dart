@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tender_admin/core/extension/navigator.extension.dart';
 import 'package:tender_admin/core/shared/classes/dimensions.dart';
 import 'package:tender_admin/core/shared/module/images/multiimages/images.dart';
 import 'package:tender_admin/core/shared/module/images/multiimages/logic/images.cubit.dart';
@@ -25,7 +24,9 @@ class SourceForm extends StatelessWidget {
         BlocProvider(
           create: (context) {
             final cubit = NewsPaperCubit();
-            if (isNew) cubit.getNewsPapers();
+            isNew
+                ? cubit.getNewsPapers()
+                : cubit.selectNewsPaper(source.newsPaper!);
             return cubit;
           },
         ),
@@ -35,11 +36,13 @@ class SourceForm extends StatelessWidget {
       ],
       child: Container(
         padding: EdgeInsets.all(20.w),
+        width: 500.w,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(25.r),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             isNew ? NewsPapers() : NewsPaper(source.newsPaper!),
             ImagesWidget(
@@ -56,14 +59,17 @@ class SourceForm extends StatelessWidget {
                   .isNotEmpty;
               return InkWell(
                 onTap: () {
-                  if (!isValid) return;
                   source.updateImages(
                       context.read<ImagesCubit>().state.images);
-                  source.updateNewsPaper(context
-                      .read<NewsPaperCubit>()
-                      .state
-                      .selectedNewspaper);
-                  context.back(source);
+
+                  source.updateNewsPaper(
+                    context
+                        .read<NewsPaperCubit>()
+                        .state
+                        .selectedNewspaper,
+                  );
+
+                  Navigator.of(context).pop(source);
                 },
                 child: Container(
                   padding: EdgeInsets.all(5.h),

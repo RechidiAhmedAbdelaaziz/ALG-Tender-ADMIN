@@ -9,7 +9,7 @@ class SourceState {
       SourceState(sources: sources);
 
   SourceState _add(SourceDTO source) =>
-      SourceState(sources: sources.withUnique(source));
+      SourceState(sources: [...sources, source]);
 
   SourceState _remove(SourceDTO source) =>
       SourceState(sources: sources.without(source));
