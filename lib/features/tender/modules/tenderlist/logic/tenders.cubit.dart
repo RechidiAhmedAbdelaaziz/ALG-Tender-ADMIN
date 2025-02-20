@@ -12,7 +12,9 @@ class TendersCubit extends Cubit<TendersState> {
   final _repo = locator<TenderRepo>();
   final _paginationDto = TenderFiltersDto();
 
-  TendersCubit() : super(TendersState.initial());
+  TendersCubit() : super(TendersState.initial()) {
+    _paginationDto.limit.setValue(15);
+  }
 
   TenderFiltersDto get filters => _paginationDto;
 

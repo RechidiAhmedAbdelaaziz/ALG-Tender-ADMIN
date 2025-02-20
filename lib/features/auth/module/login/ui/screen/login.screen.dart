@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void goToHome() => context.to(TenderNavigator.createTender());
+    void goToHome() => context.to(TenderNavigator.tenders());
 
     return BlocListener<LoginCubit, LoginState>(
       listener: (context, state) {

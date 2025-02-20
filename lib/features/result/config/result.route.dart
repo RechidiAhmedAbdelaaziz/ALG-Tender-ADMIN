@@ -34,7 +34,8 @@ class ResultRoute extends AppRouteBase {
       BuildContext context, GoRouterState state) {
     final tenderId = state.pathParameters['id'];
     return BlocProvider(
-      create: (context) => MultiResultCubit(tenderId!)..loadResults(),
+      create: (context) =>
+          MultiResultCubit(tenderId!)..loadResults(13),
       child: const TenderResults(),
     );
   }

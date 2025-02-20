@@ -24,7 +24,9 @@ class MultiResultCubit extends Cubit<MultiResultState> {
     loadResults();
   }
 
-  void loadResults() async {
+  void loadResults([int? limit]) async {
+    _paginationDto.limit.setValue(limit ?? _paginationDto.limit.value);
+    
     emit(state._loading());
 
     final results = await _repo.getResults(_paginationDto);

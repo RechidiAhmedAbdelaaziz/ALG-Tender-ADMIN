@@ -136,10 +136,10 @@ class TendersScreen extends StatelessWidget {
   Widget _buildTitle(TenderModel tender) => Row(
         children: [
           Container(
-            width: 40.r,
-            height: 40.r,
+            width: 60.r,
+            height: 60.r,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(12.r),
               image: DecorationImage(
                 image: NetworkImage(tender.announcer?.imageUri ?? ''),
                 fit: BoxFit.cover,

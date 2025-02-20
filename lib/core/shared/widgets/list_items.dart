@@ -85,12 +85,13 @@ class ListItems<T> extends StatelessWidget {
                 .toList(),
           ),
           const Divider(),
+          heightSpace(12),
           Expanded(
             child: PaginationBuilder(
               items: items,
               onLoadMore: onLoad,
               isLoading: isLoading,
-              separator: heightSpace(4),
+              separator: heightSpace(12),
               itemBuilder: (item) => Row(
                 children: flexItems
                     .map(
