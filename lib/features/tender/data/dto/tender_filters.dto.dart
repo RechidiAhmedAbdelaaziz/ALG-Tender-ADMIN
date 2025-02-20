@@ -40,7 +40,7 @@ class TenderFiltersDto extends PaginationDto {
 
     if (isStartup.value == true) json['isStartup'] = isStartup.value;
     if (regions.value.isNotEmpty) json['regions'] = regions.value;
-    return json.withoutNulls();
+    return json.withoutNullsOrEmpty();
   }
 
   @override

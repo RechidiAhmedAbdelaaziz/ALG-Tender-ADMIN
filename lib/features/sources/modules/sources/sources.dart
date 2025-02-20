@@ -85,20 +85,6 @@ class SourceWidget extends StatelessWidget {
                 },
                 icon: const Icon(Icons.edit),
               ),
-              IconButton(
-                onPressed: () {
-                  context.alertDialog(
-                    title: 'Suppression',
-                    content:
-                        'Voulez-vous vraiment supprimer cette source?',
-                    onConfirm: () {
-                      cubit.removeSource(source);
-                      onDelete?.call(source);
-                    },
-                  );
-                },
-                icon: const Icon(Icons.delete),
-              ),
             ],
           ),
           BlocProvider(

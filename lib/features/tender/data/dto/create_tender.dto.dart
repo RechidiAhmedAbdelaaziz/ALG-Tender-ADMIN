@@ -27,6 +27,6 @@ class CreateTenderDTO extends TenderDto {
       'region': region.text,
       'sources': await Future.wait(
           sources.value.map((e) async => await e.toMap())),
-    }.withoutNulls();
+    }.withoutNullsOrEmpty();
   }
 }

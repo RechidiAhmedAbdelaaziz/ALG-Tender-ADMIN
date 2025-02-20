@@ -11,6 +11,7 @@ import 'package:tender_admin/core/shared/widgets/list_items.dart';
 import 'package:tender_admin/core/shared/widgets/multi_drop_down_menu.dart';
 import 'package:tender_admin/core/shared/widgets/submit_button.dart';
 import 'package:tender_admin/features/announcer/modules/singleannouncer/ui/selected_announcer.dart';
+import 'package:tender_admin/features/result/config/result.navigator.dart';
 import 'package:tender_admin/features/tender/config/tender.navigator.dart';
 import 'package:tender_admin/features/tender/data/dto/tender_filters.dto.dart';
 import 'package:tender_admin/features/tender/data/models/tender.model.dart';
@@ -29,7 +30,14 @@ class TendersScreen extends StatelessWidget {
       items:
           context.select((TendersCubit cubit) => cubit.state.tenders),
       flexItems: _flexItems(),
-      onAdd: () => context.to(TenderNavigator.createTender()),
+      onAdd: () async {
+        final tender = await context
+            .to<TenderModel>(TenderNavigator.createTender());
+        if (tender != null) {
+          // ignore: use_build_context_synchronously
+          context.read<TendersCubit>().addTender(tender);
+        }
+      },
       searchController: context.read<TendersCubit>().filters.keyword,
       onSearch: () => context.read<TendersCubit>().filterTenders(),
       onLoad: () => context.read<TendersCubit>().loadTenders(),
@@ -75,7 +83,6 @@ class TendersScreen extends StatelessWidget {
           header: _buildHeaderTitle('Échéance (*)'),
           flex: 2,
         ),
-        // options column
         FlexItem<TenderModel>(
           builder: (TenderModel tender) => Stack(
             children: [
@@ -113,7 +120,8 @@ class TendersScreen extends StatelessWidget {
             Icon(Icons.info_outline),
             Text('Voir les résultats')
           ]),
-          //TODO go to results screen
+          onTap: () =>
+              context.off(ResultNavigator.results(tender.id!)),
         ),
       ];
 

@@ -11,6 +11,7 @@ import 'package:tender_admin/core/services/filepicker/filepick.service.dart';
 import 'package:tender_admin/features/announcer/config/announcer.dependency.dart';
 import 'package:tender_admin/features/auth/configs/auth.dependency.dart';
 import 'package:tender_admin/features/newspaper/config/newspaper.dependency.dart';
+import 'package:tender_admin/features/result/config/result.dependency.dart';
 import 'package:tender_admin/features/tender/config/tender.dependency.dart';
 
 part 'dependecy_base.dart';

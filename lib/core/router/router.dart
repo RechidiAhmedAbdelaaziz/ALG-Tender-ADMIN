@@ -7,6 +7,7 @@ import 'package:tender_admin/features/auth/configs/auth.route.dart';
 import 'package:tender_admin/features/auth/data/sources/auth.cache.dart';
 import 'package:tender_admin/features/auth/module/login/ui/screen/login.screen.dart';
 import 'package:tender_admin/features/home/configs/home.route.dart';
+import 'package:tender_admin/features/tender/modules/tenderlist/view/tenders.screen.dart';
 
 import '../di/locator.dart';
 
@@ -15,6 +16,7 @@ part 'navigator_base.dart';
 
 class AppRouter {
   final routerConfig = GoRouter(
+    initialLocation: TendersScreen.route,
     routes: _generateRoutes(),
     debugLogDiagnostics: true,
     redirect: _handelRedirect,

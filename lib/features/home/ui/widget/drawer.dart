@@ -20,7 +20,7 @@ class _Drawer extends StatelessWidget {
               title: 'Tenders',
               icon: KIcons.tenders,
               routeName: AppRoutes.tender,
-              onTap: () => context.to(TenderNavigator.tenders()),
+              onTap: () => context.off(TenderNavigator.tenders()),
             ),
           ].map((item) => _buildDrawerItem(item, context)),
           const Spacer(),
@@ -77,8 +77,8 @@ class _Drawer extends StatelessWidget {
             widthSpace(40),
             SvgPicture.asset(
               item.icon,
-              height: 24.h,
-              width: 24.w,
+              height: 30.r,
+              width: 30.r,
               colorFilter: !item.isSelected(context)
                   ? const ColorFilter.mode(
                       KColors.grey, BlendMode.srcIn)

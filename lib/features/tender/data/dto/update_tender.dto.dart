@@ -48,7 +48,7 @@ class UpdateTenderDTO extends TenderDto {
             return e.toMap();
           }),
         ),
-    }.withoutNulls();
+    }.withoutNullsOrEmpty();
 
     (json['sources'] as List<dynamic>)
         .removeWhere((value) => value['newsPaper'] == null);

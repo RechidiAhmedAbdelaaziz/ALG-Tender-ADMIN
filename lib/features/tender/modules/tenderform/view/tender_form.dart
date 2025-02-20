@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tender_admin/core/extension/dialog.extension.dart';
 import 'package:tender_admin/core/extension/navigator.extension.dart';
 import 'package:tender_admin/core/extension/snackbar.extension.dart';
@@ -34,6 +35,11 @@ class TenderForm extends StatelessWidget {
     return BlocListener<TenderCubit, TenderState>(
       listener: (context, state) {
         state.onError(context.showErrorSnackbar);
+        state.onSave(
+          (tender) => context.canPop()
+              ? context.pop(tender)
+              : context.off(TenderNavigator.tenders()),
+        );
       },
       child: AppForm(
         title: 'Tender Form',

@@ -1,9 +1,14 @@
 part of '../view/tenders.screen.dart';
 
-class _Filters extends StatelessWidget {
+class _Filters extends StatefulWidget {
   final TenderFiltersDto filters;
   const _Filters(this.filters);
 
+  @override
+  State<_Filters> createState() => _FiltersState();
+}
+
+class _FiltersState extends State<_Filters> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,34 +27,35 @@ class _Filters extends StatelessWidget {
               _buildTitle(),
               const Spacer(),
               _buildButtons(
-                onRestore: () => filters.clear(),
+                onRestore: () =>
+                    setState(() => widget.filters.clear()),
                 onCancel: () => context.back(),
               ),
             ],
           ),
           const Divider(),
-          SelectableAnnouncer(controller: filters.announcer),
+          SelectableAnnouncer(controller: widget.filters.announcer),
           KDropDownMenu(
             items: ['itmes'],
-            controller: filters.marketType,
+            controller: widget.filters.marketType,
             title: 'Type de marché',
             initalized: false,
           ),
           MultiDropDownMenu(
             items: ['itmes'],
-            controller: filters.regions,
+            controller: widget.filters.regions,
             title: 'Regions',
             initalized: false,
           ),
           MultiDropDownMenu(
             items: ['industries'],
-            controller: filters.industries,
+            controller: widget.filters.industries,
             title: 'Industries',
             initalized: false,
           ),
           AppCheckBox(
             title: 'Startup',
-            onChanged: filters.isStartup.setValue,
+            onChanged: widget.filters.isStartup.setValue,
           ),
           heightSpace(12),
           Align(

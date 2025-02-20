@@ -40,11 +40,11 @@ class KDropDownMenu extends StatelessWidget {
             closedBorder: Border.all(color: Colors.grey),
           ),
           items: items,
-          initialItem: initalized
-              ? items.contains(controller.text)
-                  ? controller.text
-                  : items.first
-              : null,
+          initialItem: items.contains(controller.text)
+              ? controller.text
+              : initalized
+                  ? items.first
+                  : null,
           onChanged: (value) {
             if (value != null) controller.text = value;
           },

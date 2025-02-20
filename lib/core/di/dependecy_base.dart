@@ -9,6 +9,7 @@ abstract class FeaturesDependency {
       AnnouncerDependency(),
       NewspaperDependency(),
       TenderDependency(),
+      ResultDependency(),
     ];
 
     for (final dependency in dependencies) {

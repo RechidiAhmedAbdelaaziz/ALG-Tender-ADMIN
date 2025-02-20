@@ -10,7 +10,7 @@ abstract class AppRoutes {
   static const String updateTender = 'UPDATE_TENDER';
 
   //* RESULT ROUTES
-  static const String result = 'RESULT';
-  static const String createResult = 'CREATE_RESULT';
-  static const String updateResult = 'UPDATE_RESULT';
+  static const String result = 'TENDER_RESULT';
+  static const String createResult = 'CREATE_TENDER_RESULT';
+  static const String updateResult = 'UPDATE_TENDER_RESULT';
 }

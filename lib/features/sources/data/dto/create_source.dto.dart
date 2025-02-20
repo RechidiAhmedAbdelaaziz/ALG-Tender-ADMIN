@@ -12,6 +12,6 @@ class CreateSourceDTO extends SourceDTO {
     return {
       'newsPaper': _newsPaper.value!.id,
       'images': await _images.value.imageUrls,
-    }.withoutNulls();
+    }.withoutNullsOrEmpty();
   }
 }

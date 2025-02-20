@@ -111,14 +111,15 @@ class ListItems<T> extends StatelessWidget {
   Widget _buildButtons() {
     return Row(
       children: [
-        _buildButton(
-          icon: Icons.filter_list,
-          title: 'Filter',
-          color: Colors.white,
-          textColor: Colors.black,
-          borderColor: Colors.black,
-          onTap: showFilter,
-        ),
+        if (showFilter != null)
+          _buildButton(
+            icon: Icons.filter_list,
+            title: 'Filter',
+            color: Colors.white,
+            textColor: Colors.black,
+            borderColor: Colors.black,
+            onTap: showFilter,
+          ),
         widthSpace(20),
         _buildButton(
           icon: Icons.add,

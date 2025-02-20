@@ -32,8 +32,6 @@ class TenderCubit extends Cubit<TenderState> {
 
     final dto = state.dto;
 
-   
-
     final result = dto is CreateTenderDTO
         ? await _repo.createTender(dto)
         : await _repo.updateTender(dto as UpdateTenderDTO);

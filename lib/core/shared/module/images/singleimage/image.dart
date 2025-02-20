@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tender_admin/core/extension/dialog.extension.dart';
 import 'package:tender_admin/core/shared/dto/imagedto/image.dto.dart';
 
 import 'logic/image.cubit.dart';
@@ -109,8 +110,14 @@ class _Image extends StatelessWidget {
                     if (canRemove)
                       IconButton(
                         icon: const Icon(Icons.delete),
-                        onPressed: () =>
-                            context.read<ImageCubit>().removeImage(),
+                        onPressed: () => context.alertDialog(
+                          title: 'Supprimer l\'image',
+                          content:
+                              'Voulez-vous vraiment supprimer cette image?',
+                          onConfirm: () => context
+                              .read<ImageCubit>()
+                              .removeImage(),
+                        ),
                       ),
                   ],
                 ),
